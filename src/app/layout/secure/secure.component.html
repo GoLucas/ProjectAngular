@@ -1,4 +1,8 @@
-<!-- <mat-sidenav-container>
+<!-- <p>
+  secure works!
+</p>
+<router-outlet></router-outlet> -->
+<mat-sidenav-container>
 
   <mat-sidenav #sidenav>
 
@@ -10,6 +14,7 @@
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/parent" [routerLinkActive]="['mat-list-item-focus']">Parent</a>
       <hr>
       <a mat-list-item (click)="sidenav.toggle()">login</a>
+      <a mat-list-item (click)=logout()>logout</a>
     </mat-nav-list>
 
   </mat-sidenav>
@@ -24,5 +29,3 @@
     <router-outlet></router-outlet>
   </div>
 </mat-sidenav-container>
- -->
-<router-outlet></router-outlet>

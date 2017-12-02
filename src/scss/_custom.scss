@@ -1,0 +1,21 @@
+
+body {
+  background-color: $backgroud_color;
+  margin: 0;
+  }
+
+  html, body, material-app, mat-sidenav-container{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .fixedNav{
+    position: fixed;
+  }
+  .pageContent{
+    margin-top: 64px;
+  }
+
+  .mat-nav-list .mat-list-item-content:hover, .mat-nav-list .mat-list-item-content.mat-list-item-focus {
+    background: none;
+  }
