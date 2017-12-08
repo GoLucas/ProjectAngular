@@ -24,6 +24,9 @@ import { EnsureAuthenticated } from './guards/ensure-authenticated.service';
 import { LoginRedirect } from './guards/login-redirect.service';
 import { AuthService } from './shared/auth/auth.service';
 import { LoginComponent } from './public/login/login.component';
+import { HomeadminComponent } from './secure/homeadmin/homeadmin.component';
+import { EnsureAuthenticatedAdmin } from './guards/ensure-authenticated-admin.service';
+
 
 
 
@@ -37,6 +40,7 @@ import { LoginComponent } from './public/login/login.component';
     HomeComponent,
     LoginComponent,
     SecureComponent,
+    HomeadminComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,9 +48,9 @@ import { LoginComponent } from './public/login/login.component';
     MaterialModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     GuardsModule,
-    ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -59,8 +63,10 @@ import { LoginComponent } from './public/login/login.component';
   providers: [
      AuthService,
      EnsureAuthenticated,
+     EnsureAuthenticatedAdmin,
      LoginRedirect
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [FormsModule, ReactiveFormsModule]
 })
 export class AppModule { }

@@ -22,10 +22,12 @@ export class AuthService {
       .subscribe(
         res => {
           localStorage.setItem('token', res.auth_token);
-          console.log(res);
+          localStorage.setItem('admin', res.admin);
+          localStorage.setItem('user_id', res.user_id);
+          console.log('response form server: ' + JSON.stringify(res));
         },
         err => {
-          console.log('Error occured');
+          console.log('<POST>Error occured');
         }
       );
   }

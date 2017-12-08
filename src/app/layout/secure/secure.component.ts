@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-secure',
   templateUrl: './secure.component.html',
-  styleUrls: ['./secure.component.css']
+  styleUrls: ['./secure.component.scss']
 })
 export class SecureComponent implements OnInit {
 

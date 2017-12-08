@@ -15,12 +15,7 @@ export class RegisterComponent {
   onRegister(): void {
     console.log(this.user);
     this.auth.register(this.user);
-    // console.log(user.json());
-    // localStorage.setItem('token', user.json().auth_token);
-    // localStorage.setItem('user_id', user.json().user_id);
-    // localStorage.setItem('user_name', user.json().user_name);
-    // localStorage.setItem('user_email', user.json().user_email);
-    // console.log(localStorage.getItem('user_name'));
+
     this.router.navigateByUrl('/');
   }
 }

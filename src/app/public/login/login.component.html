@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
 
   <div class="col-md-4">
     <h1>Login</h1>
@@ -17,5 +17,30 @@
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
-</div>
+</div> -->
 
+<div class="signin-content">
+  <mat-card>
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Logowanie</mat-card-title>
+        </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="userForm" (ngSubmit)="send()">
+        <p>Please login to continue</p>
+
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="email" formControlName="email" required>
+        </mat-form-field>
+        <div [ngStyle]="{'color': 'red'}" *ngIf="email.errors?.emailExist">zajety email</div>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+        </mat-form-field>
+        <div *ngIf="password.invalid">Zle haslo</div>
+
+        <button mat-raised-button  color="primary" type="submit" >Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
