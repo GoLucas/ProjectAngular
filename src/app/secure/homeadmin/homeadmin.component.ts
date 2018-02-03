@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homeadmin.component.scss'],
 })
 export class HomeadminComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

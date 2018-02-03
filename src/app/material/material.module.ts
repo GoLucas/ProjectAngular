@@ -11,6 +11,18 @@ import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import {
+  MatMenuModule,
+  MatDialogModule,
+  MatChipsModule,
+  MatAutocompleteModule,
+  MatExpansionModule,
+  MatDatepickerModule
+} from '@angular/material';
 
 
 
@@ -25,7 +37,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +59,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule {}

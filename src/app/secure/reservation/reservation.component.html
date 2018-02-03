@@ -1,0 +1,84 @@
+  <div fxLayout="column"
+      ngClass="contentReservation"
+      fxLayoutAlign="center start">
+
+      <div class="reservation_row"
+      fxLayout fxLayoutAlign="space-between start">
+      <div class="blocks" fxFlex = "40%" fxFlexFill >
+          <mat-card class="date-card">
+              <mat-card-header>
+                <h2>Wybierz Datę</h2>
+              </mat-card-header>
+
+              <mat-card-content>
+                  <form [formGroup]="dateForm" (ngSubmit)="check()" >
+                  <mat-form-field>
+                      <input matInput
+                       [min]="minDate"
+                        [max]="maxDate"
+                         [matDatepicker]="pickerStart"
+                          placeholder="OD"
+                           formControlName="dateStart">
+                      <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerStart ></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput
+                      [min]="minDate" [max]="maxDate"
+                       [matDatepicker]="pickerEnd"
+                        placeholder="DO"
+                         formControlName="dateEnd"
+                         [errorStateMatcher]="matcher">
+                      <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerEnd></mat-datepicker>
+                      <mat-error *ngIf="dateForm.hasError('endDateLessThanStartDate')">Data DO nie może być wczniejsza niż OD</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button  color="primary" [disabled]="dateForm.invalid" >Sprawdź</button>
+                  </form>
+              </mat-card-content>
+            </mat-card>
+      </div>
+
+      <div fxFlex = "60%" fxFlexFill fxFlexOffset="30px" >
+
+          <div *ngIf="(allCottages$ | async)?.length > 0;then cottages else notfound">here is ignored</div>
+
+          <ng-template #cottages>
+              <mat-card >
+                  <mat-list>
+                      <h2 mat-header>Dostępne Domki</h2>
+                        <!-- <mat-list-item *ngFor="let cottage of allCottages$ | async" >
+                          <mat-icon mat-list-icon>folder</mat-icon>
+                          <h4 mat-line>{{cottage.name}} </h4>
+                          <p mat-line> {{cottage.description}} </p>
+                          <input value="cottage.name" hidden>
+                        </mat-list-item> -->
+
+                        <a ngClass="dec" mat-list-item
+                        routerLink="/home"
+                        *ngFor="let cottage of allCottages$ | async"
+                        [routerLink]="['/cottage-details', cottage.id, resdate.start, resdate.end]" >
+                          <mat-icon mat-list-icon>folder</mat-icon>
+                            <h4 mat-line>{{cottage.name}} </h4>
+                            <p mat-line> {{cottage.description}} </p>
+                            <input value="cottage.name" hidden>
+                        </a>
+
+                    </mat-list>
+                  </mat-card>
+          </ng-template>
+
+          <ng-template #notfound>
+              <mat-card *ngIf="errData">
+                Brak wolnych domkw w podanym okresie czasu
+              </mat-card>
+          </ng-template>
+      </div>
+
+
+
+    </div>
+
+	</div>
+

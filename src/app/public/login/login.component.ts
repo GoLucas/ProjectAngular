@@ -11,55 +11,40 @@ import {
   Validators
 } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
-import { EmailAvailable } from '../../shared/emailAvailable';
-
-
+import { MatSnackBar } from '@angular/material';
+import decode from 'jwt-decode';
+//import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  // providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class LoginComponent {
-  user: User = new User();
+ // user: User = new User();
   public userForm: FormGroup;
-
+  public error = false;
   constructor(
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
+    public snackBar: MatSnackBar,
+    //private location: Location,
     fb: FormBuilder
   ) {
     this.userForm = fb.group({
-      email: [null, Validators.required, EmailAvailable.unique.bind(this)],
-      password: [null, Validators.required, Validators.minLength(3), Validators.maxLength(16)]
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]]
     });
 
   }
 
-
-  // wyslij() {
-  //   const API_URL = 'http://localhost:80/Project-API/public/api/checkemail';
-  //   const userEmail = 'user@user.pl';
-  //       this.http.get(`${API_URL}?userEmail=${userEmail}`, {
-  //           headers: new HttpHeaders().set('Content-Type', 'application/json')
-  //           })
-  //         .subscribe(res => {
-  //           if (res === true) {
-  //             console.log('resolve emailExist : true');
-  //           }
-  //           else() {
-  //             console.log(' resolve: null');
-  //           }
-  //         });
-  // }
-
   OnInit() {
-  }
+    // reset login status
+    this.auth.logout();
+}
 
-  send(){
-    console.log(this.userForm);
-  }
 
 //w html musi być sprawdona czy email nie m nulla po przez - '?' (email.errors?.emailExist)
 get email(){
@@ -71,10 +56,48 @@ get password(){
 }
 
 
-  onLogin(): void {
-    this.auth.login(this.user);
-    this.router.navigateByUrl('/home');
-    console.log(this.user);
+  // onLogin(): void {
+  //   console.log(this.userForm.value);
+  //   this.auth.login(this.userForm.value);
+  //   this.router.navigateByUrl('/home');
+  // }
+
+
+  onLogin() {
+    // console.log(this.location.path() + this.location.isCurrentPathEqualTo('/login'));
+    // console.log(this.router.url);
+
+    this.auth.login(this.userForm.value)
+        .subscribe(result => {
+            if (result === true) {
+                this.snackBar.open('Logged in succesfully', ' ' , {
+                duration : 2000,
+                panelClass: ['snack-bar-message', 'snack-bar-success'],
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+              });
+              // const token = localStorage.getItem('token');
+              // const tokenPayload = decode(token);
+              // if (tokenPayload.role === 'admin') {
+              //   this.router.navigateByUrl('homeadmin');
+              // }else {
+              //   this.router.navigateByUrl('home');
+              // }
+              this.router.navigateByUrl('home');
+            }
+            this.error = false;
+        }, err => {
+          this.snackBar.open('Login failed', ' ' , {
+            duration : 2000,
+            panelClass: ['snack-bar-message', 'snack-bar-error'],
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
+          this.error = true;
+          console.log(err);
+        });
   }
+
+
 
 }

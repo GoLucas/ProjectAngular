@@ -1,31 +1,90 @@
-<!-- <p>
-  secure works!
-</p>
-<router-outlet></router-outlet> -->
-<mat-sidenav-container>
+<mat-sidenav-container class="all-wrap" fullscreen>
 
-  <mat-sidenav #sidenav>
-
-    <mat-toolbar color="primary">
+  <mat-sidenav #sidenav class="sidenav" mode="over">
+    <mat-toolbar color="primary" class="sidenav__header">
       Options
     </mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="" [routerLinkActive]="['mat-list-item-focus']">Home</a>
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/parent" [routerLinkActive]="['mat-list-item-focus']">Parent</a>
-      <hr>
-      <a mat-list-item (click)="sidenav.toggle()">login</a>
-      <a mat-list-item (click)=logout()>logout</a>
+    <a md-button style="height: 0; position: absolute; " routerLink="">
+      <!-- 'absorbs' the behavior - żeby sie chujostwo pierwsze nie podwietlało -->
+    </a>
+    <mat-nav-list class="sidenav__list">
+      <a mat-list-item ngClass="navListHeader">
+        <mat-icon class="sidenav__list__icon">home</mat-icon>
+        GŁÓWNE
+      </a>
+      <a mat-list-item routerLink="/reservation">
+        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        Reservation
+      </a>
+      <a mat-list-item routerLink= "/reservation-view">
+        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        My reservations
+      </a>
+      <a mat-list-item routerLink="/payments">
+        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        Payments
+      </a>
     </mat-nav-list>
 
+    <mat-nav-list class="sidenav__list">
+      <a *ngIf="isAdmin()" mat-list-item (click)="sidenav.toggle()" routerLink="/homeadmin">
+        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        HomeAdmin
+      </a>
+    </mat-nav-list>
   </mat-sidenav>
-  <mat-toolbar color="primary" ngClass="fixedNav">
 
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    Quick Chatt
-  </mat-toolbar>
-  <div class="pageContent">
-    <router-outlet></router-outlet>
+  <div class="page-wrap">
+
+    <header role="banner">
+
+      <mat-toolbar color="primary" ngClass="fixedNav" [ngStyle]="{'z-index': 1}">
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>Quick Chatt</span>
+          <span class="example-spacer"></span>
+          <span>Witaj {{userName}} {{isAdmin() ? "*admin*" : ""}}</span>
+          <div *ngIf="(isLoggedIn | async)">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Test</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Test</span>
+              </button>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+
+          </div>
+        </mat-toolbar-row>
+
+      </mat-toolbar>
+
+
+    </header>
+
+    <div ngClass="pageContent">
+      <router-outlet></router-outlet>
+    </div>
+
+    <footer  ngClass="footer-list"
+    fxLayout="row"
+     fxLayoutAlign="center center">
+      <div>
+            Wszelkie prawa zastrzeżone Copyright
+
+      </div>
+    </footer>
+
   </div>
 </mat-sidenav-container>

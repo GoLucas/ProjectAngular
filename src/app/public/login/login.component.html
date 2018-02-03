@@ -20,27 +20,35 @@
 </div> -->
 
 <div class="signin-content">
-  <mat-card>
+  <mat-card class="background-form">
       <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Logowanie</mat-card-title>
         </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="userForm" (ngSubmit)="send()">
+      <form [formGroup]="userForm" (ngSubmit)="onLogin()" >
         <p>Please login to continue</p>
 
         <mat-form-field class="full-width-input">
           <input matInput placeholder="email" formControlName="email" required>
         </mat-form-field>
-        <div [ngStyle]="{'color': 'red'}" *ngIf="email.errors?.emailExist">zajety email</div>
+        <div [ngClass]="'error-msg'" *ngIf="email.errors?.email && password.touched">zly format email</div>
+
         <mat-form-field class="full-width-input">
           <input matInput type="password" placeholder="Password" formControlName="password" required>
         </mat-form-field>
-        <div *ngIf="password.invalid">Zle haslo</div>
-
-        <button mat-raised-button  color="primary" type="submit" >Login</button>
+        <div [ngClass]="'error-msg'" *ngIf="password.invalid && password.touched">zla dlugosc</div>
+        <br>
+        <button mat-raised-button  color="primary" type="submit" [disabled]="userForm.invalid" >Login</button>
       </form>
     </mat-card-content>
+    <div [ngClass]="'error-msg'" *ngIf="error">zly login lub haslo</div>
   </mat-card>
 </div>
+<p>
+Niepoprawny form: {{userForm.invalid}}
+<br>
+Jest błąd:  {{password.hasError('required')  | json}}
+</p>
+<a routerLink="/register">Register</a>

@@ -18,3 +18,11 @@ mat-card {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+.error-msg {
+  display: block;
+  font-size: 75%;
+  bottom: -2em;
+  color: red;
+}
+

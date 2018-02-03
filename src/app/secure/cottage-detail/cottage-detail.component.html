@@ -1,0 +1,38 @@
+<div fxLayout="row" ngClass="contentCottageDetail" fxLayoutAlign="center center">
+
+    <div class="blocks" fxFlex="50%" fxFlexFill>
+      <mat-card>
+        <mat-card-header>
+          <h2>{{(Cottage$ | async)?.name}}</h2>
+        </mat-card-header>
+        <img mat-card-image src="https://otonoc.pl/zdjecie-1-10802-tatra-house---stylowe-domki-do-wynajecia.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content ngClass="text_justify">
+       <p ngClass="description">  {{(Cottage$ | async)?.description}} </p>
+       <p>Liczba miejsc: <span ngClass="capacity">{{(Cottage$ | async)?.capacity}} </span></p>
+       <br>
+       <mat-divider></mat-divider>
+       <p> Udogodnienia:</p>
+          <mat-chip-list *ngFor="let add of (Cottage$ | async)?.additions; let i = index;">
+            <mat-chip selected="true" [color]="chips[1]"> {{add}} </mat-chip>
+          </mat-chip-list>
+          <br>
+          <br>
+        <mat-divider></mat-divider>
+        <h3>od : {{formatedDateStart}} do: {{formatedDateEnd}}</h3>
+        <br>
+        <p>Cena za dobę: {{(Cottage$ | async)?.basePrice}}zł</p>
+        <p>Cena za wynajem:{{(Cottage$ | async)?.basePrice}}zł x {{diffDays}} dni = {{(Cottage$ | async)?.price}}zł</p>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button  color="primary" type="submit" (click)="getReservation()">Zarezerwuj</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- <button mat-raised-button  color="primary" type="submit" (click)="getCottage()">Sprawdź</button> -->
+
+  </div>
+
+
+

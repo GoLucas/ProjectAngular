@@ -1,20 +1,158 @@
+.fixedNav {
+  position: fixed;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
 
-body {
-  margin: 0;
-  }
+.snack-bar-message {
+  -webkit-background-size: 40px 40px;
+  -moz-background-size: 40px 40px;
+  background-size: 40px 40px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    color-stop(0.25, rgba(255, 255, 255, 0.05)),
+    color-stop(0.25, transparent),
+    color-stop(0.5, transparent),
+    color-stop(0.5, rgba(255, 255, 255, 0.05)),
+    color-stop(0.75, rgba(255, 255, 255, 0.05)),
+    color-stop(0.75, transparent),
+    to(transparent)
+  );
+  background-image: -webkit-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 75%,
+    transparent
+  );
+  // background-image: -moz-linear-gradient(
+  //   135deg,
+  //   rgba(255, 255, 255, 0.05) 25%,
+  //   transparent 25%,
+  //   transparent 50%,
+  //   rgba(255, 255, 255, 0.05) 50%,
+  //   rgba(255, 255, 255, 0.05) 75%,
+  //   transparent 75%,
+  //   transparent
+  // );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 75%,
+    transparent
+  );
+  -moz-box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  -webkit-animation: animate-bg 5s linear infinite;
+  -moz-animation: animate-bg 5s linear infinite;
+}
+.snack-bar-info {
+  background-color: #4ea5cd;
+  border-color: #3b8eb5;
+}
 
-  html, body, material-app, mat-sidenav-container{
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .fixedNav{
-    position: fixed;
-  }
-  .pageContent{
-    margin-top: 64px;
-  }
+.snack-bar-error {
+  background-color: #de4343;
+  border-color: #c43d3d;
+}
 
-  .mat-nav-list .mat-list-item-content:hover, .mat-nav-list .mat-list-item-content.mat-list-item-focus {
-    background: none;
+.snack-bar-warning {
+  background-color: #eaaf51;
+  border-color: #d99a36;
+}
+
+.snack-bar-success {
+  background-color: #61b832;
+  border-color: #55a12c;
+}
+
+@-webkit-keyframes animate-bg {
+  from {
+    background-position: 0 0;
   }
+  to {
+    background-position: -80px 0;
+  }
+}
+
+@-moz-keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -80px 0;
+  }
+}
+
+
+.mat-chip-list-wrapper {
+  display: inline !important;
+}
+
+/*
+ * Actual Sticky Footer Styles
+ */
+ .all-wrap {
+  min-height: 100vh;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pageContent {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding-top: 100px;
+}
+
+footer{
+height: 60px;
+background: #3f51b5;
+color: #fff;
+padding: 12px;
+}
+
+/*
+ * Make the Component injected by Router Outlet full height:
+ */
+main {
+  display: flex;
+  flex-direction: column;
+  > *:not(router-outlet) {
+    flex: 1;
+    display: block;
+  }
+}

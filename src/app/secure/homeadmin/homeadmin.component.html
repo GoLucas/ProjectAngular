@@ -1,3 +1,37 @@
-<p>
-  homeadmin works!
-</p>
+<div class="container"
+     fxLayout
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+>
+<!-- fxFlexOffset nie działa z gap -->
+  <div class="item item-1" fxFlex >
+      <mat-card class="example-card">
+          <mat-card-header>
+            <h1>Welcome</h1>
+          </mat-card-header>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+
+  <div class="item item-2" fxFlex >Item 2</div>
+  <div class="item item-3" fxFlex>Item 3</div>
+</div>
+
+<div class="container"
+     fxLayout
+     fxLayoutAlign="center">
+  <div class="item item-4" fxFlex>Item 4</div>
+  <div class="item item-5" fxFlex>Item 5</div>
+</div>
+

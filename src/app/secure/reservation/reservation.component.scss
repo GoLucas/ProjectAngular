@@ -1,0 +1,25 @@
+@import'../../../scss/variables';
+
+.blocks{
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+
+.contentReservation{
+  padding:25px;
+}
+
+.reservation_row{
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.dec{
+  text-decoration: none;
+}
+
+a.dec:hover {
+  color: $font-color;
+  background-color: $link-bg-hover;
+}

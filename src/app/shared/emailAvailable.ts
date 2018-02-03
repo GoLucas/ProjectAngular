@@ -16,7 +16,7 @@ export class EmailAvailable {
     return new Promise(resolve => {
 
     const userEmail = control.value;
-    const API_URL = 'http://localhost:80/Project-API/public/api/checkemail';
+    const API_URL = 'http://api.cottage.test/api/checkemail';
 
     return this.http.get(`${API_URL}?userEmail=${userEmail}`, {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
