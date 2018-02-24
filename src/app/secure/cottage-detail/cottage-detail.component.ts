@@ -6,6 +6,8 @@ import { CottageDataService } from '../../shared/cottageData.service';
 import {ReservstionPostService} from '../../shared/reservationPost.service';
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material';
+import { ToasterService } from '../../shared/toaster.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cottage-detail',
@@ -31,7 +33,8 @@ export class CottageDetailComponent implements OnInit, OnDestroy {
     private cottageData: CottageDataService,
     private reservation: ReservstionPostService,
     public snackBar: MatSnackBar,
-    private router: Router) {}
+    private router: Router,
+    public toasterService: ToasterService) {}
 
   ngOnInit() {
 
@@ -55,7 +58,7 @@ export class CottageDetailComponent implements OnInit, OnDestroy {
 
         this.formatedDateStart = moment.unix(params['start']).format('DD/MM/YYYY');
         this.formatedDateEnd = moment.unix(params['end']).format('DD/MM/YYYY');
-        if(this.end.diff(this.start, 'days') === 0){
+        if (this.end.diff(this.start, 'days') === 0) {
           this.diffDays = this.end.diff(this.start, 'days') + 1;
         }else {
           this.diffDays = this.end.diff(this.start, 'days');
@@ -76,24 +79,12 @@ export class CottageDetailComponent implements OnInit, OnDestroy {
   getReservation() {
     console.log(this.reqres);
     this.reservation.httpPostReservation(this.reqres).subscribe(res => {
-
-        this.snackBar.open('Dokonano rezerwacji pomyslnie', ' ' , {
-        duration : 3000,
-        panelClass: ['snack-bar-message', 'snack-bar-success'],
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
-
-      this.router.navigateByUrl('home');
+      this.toasterService.showToaster('Dokonano rezerwacji pomyślnie', 'info');
+      this.router.navigateByUrl('/home');
       console.log(res);
     },
   err => {
-    this.snackBar.open('Błąd w rezerwacji', ' ' , {
-      duration : 3000,
-      panelClass: ['snack-bar-message', 'snack-bar-error'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
+    this.toasterService.showToaster('błąd w rezerwacji', 'error');
     console.log(err);
   });
     //TODO: post na server z rezerwacją start, end i id domku

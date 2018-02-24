@@ -1,0 +1,10 @@
+  <br>
+  <button mat-button (click)="inputFile.click()">Import file</button> {{ inputFile.value }}
+  <input #inputFile type="file" [style.display]="'none'" (change)="handleFileInput($event.target.files)">
+
+  <button type="submit" (click)="onSubmit()" mat-raised-button>Wyślij</button>
+  <br>
+  <br>
+<mat-divider></mat-divider>
+<br>
+<button type="submit" (click)="delete()" mat-raised-button color="warn">USUŃ ZDJĘCIA</button>

@@ -14,6 +14,7 @@ import { MaterialModule } from '../../material/material.module';
 import { MatSnackBar } from '@angular/material';
 import decode from 'jwt-decode';
 //import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { ToasterService } from '../../shared/toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -24,13 +25,13 @@ import decode from 'jwt-decode';
 export class LoginComponent {
  // user: User = new User();
   public userForm: FormGroup;
-  public error = false;
+  //public error = false;
   constructor(
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
     public snackBar: MatSnackBar,
-    //private location: Location,
+    public toasterService: ToasterService,
     fb: FormBuilder
   ) {
     this.userForm = fb.group({
@@ -70,30 +71,20 @@ get password(){
     this.auth.login(this.userForm.value)
         .subscribe(result => {
             if (result === true) {
-                this.snackBar.open('Logged in succesfully', ' ' , {
-                duration : 2000,
-                panelClass: ['snack-bar-message', 'snack-bar-success'],
-                horizontalPosition: 'center',
-                verticalPosition: 'bottom'
-              });
-              // const token = localStorage.getItem('token');
-              // const tokenPayload = decode(token);
-              // if (tokenPayload.role === 'admin') {
-              //   this.router.navigateByUrl('homeadmin');
-              // }else {
-              //   this.router.navigateByUrl('home');
-              // }
-              this.router.navigateByUrl('home');
+              const admin = localStorage.getItem('admin');
+              if (admin) {
+                this.toasterService.showToaster('zalogowano pomylnie');
+                this.router.navigateByUrl('/handle-ticket');
+              }else {
+                this.toasterService.showToaster('zalogowano pomylnie');
+                this.router.navigateByUrl('/reservation-view');
+              }
+
             }
-            this.error = false;
+            //this.error = false;
         }, err => {
-          this.snackBar.open('Login failed', ' ' , {
-            duration : 2000,
-            panelClass: ['snack-bar-message', 'snack-bar-error'],
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
-          });
-          this.error = true;
+          this.toasterService.showToaster('błąd logowania', 'error');
+          //this.error = true;
           console.log(err);
         });
   }

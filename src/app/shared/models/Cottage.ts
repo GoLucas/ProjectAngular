@@ -5,6 +5,7 @@ export class Cottage {
   description: string;
   basePrice?: number;
   price: number;
+  url?: string;
   additions: Array<string>;
   constructor() {}
 }

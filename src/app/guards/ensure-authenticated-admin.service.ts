@@ -15,7 +15,7 @@ export class EnsureAuthenticatedAdmin implements CanActivate {
       //const tokenPayload = decode(token);
 
 
-      if (!localStorage.getItem('token') && admin !== expectedRole) {
+      if (!localStorage.getItem('token') || admin !== expectedRole) {
         this.router.navigateByUrl('/login');
         return false;
       }

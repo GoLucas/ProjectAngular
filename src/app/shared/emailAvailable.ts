@@ -24,8 +24,7 @@ export class EmailAvailable {
             if ( res === true) {
               resolve({'emailExist': true});
               console.log('resolve emailExist'+ res);
-            }
-            else {
+            }else {
               resolve(null);
             console.log(' resolve null' );
             }

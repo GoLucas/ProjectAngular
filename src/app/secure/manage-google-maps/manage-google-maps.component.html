@@ -1,0 +1,75 @@
+<div ngClass="contentManage" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
+
+  <div #api fxLayout="column" fxLayoutAlign="center" fxFlex="50" fxLayoutGap="15px">
+
+
+    <div fxFlex="50" fxFlexOrder="1">
+      <mat-card>
+          <mat-card-header>
+              <!-- <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba1.jpg"> -->
+              <mat-icon mat-card-avatar>vpn_key</mat-icon>
+              <mat-card-title>Google API key</mat-card-title>
+              <mat-card-subtitle>podaj swój api key</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <form (ngSubmit)="saveAPI()">
+                    <mat-form-field class="example-full-width">
+                      <input #apiKey matInput placeholder="Google api key" [formControl]="apiKeyFormControl">
+                      <mat-error *ngIf="apiKeyFormControl.touched && apiKeyFormControl.hasError('required')">
+                        API key jest
+                        <strong>wymagany</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" [disabled]="apiKeyFormControl.invalid">Zapisz</button>
+                  </form>
+            </mat-card-content>
+
+      </mat-card>
+    </div>
+
+    <div fxFlex="50" fxFlexOrder="2">
+        <mat-card>
+            <mat-card-header>
+                <!-- <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba1.jpg"> -->
+                <mat-icon mat-card-avatar>location_searching</mat-icon>
+                <mat-card-title>Wyszukaj lokalizacje</mat-card-title>
+                <mat-card-subtitle>kolejność: ulica:miejscowość:kraj</mat-card-subtitle>
+              </mat-card-header>
+          <mat-card-content>
+              <form class="example-form">
+                  <mat-form-field class="example-full-width">
+                    <input matInput #search placeholder="Szukaj lokalizacji" spellcheck="false" class="form-control" #search [formControl]="searchControl">
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" [disabled]="disabled" (click)="saveCoordinates()">Zapisz</button>
+                </form>
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+
+  </div>
+
+  <!-- <div fxLayout="column" fxLayoutAlign=" none" fxFlex="50"> -->
+
+    <div fxFlex="50" #map>
+      <mat-card class="map-card">
+        <agm-map [style.height.px]="map.offsetHeight"
+         [latitude]="latitude"
+          [longitude]="longitude"
+           [scrollwheel]="false"
+           (mapClick)="placeMarker($event)"
+           >
+          <agm-marker
+           [latitude]="latitude"
+            [longitude]="longitude"
+            [markerDraggable]="true"
+            (dragEnd)="markerDragEnd($event)" >
+          </agm-marker>
+        </agm-map>
+      </mat-card>
+    </div>
+
+
+  <!-- </div> -->
+
+</div>

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../shared/auth/auth.service';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { ToasterService } from '../../shared/toaster.service';
 @Component({
   selector: 'app-secure',
   templateUrl: './secure.component.html',
@@ -12,8 +13,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 export class SecureComponent implements OnInit {
   isLoggedIn: Observable<boolean>;
   userName: string;
-  id : string;
-  constructor(private router: Router, public snackBar: MatSnackBar, public auth: AuthService) {
+  id: string;
+  constructor(private router: Router,
+    public toasterService: ToasterService,
+    public auth: AuthService) {
     this.isLoggedIn = auth.isLoggedIn();
    }
 
@@ -26,16 +29,8 @@ export class SecureComponent implements OnInit {
   }
 
   logout() {
-    // this.router.navigateByUrl('');
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user_id');
     this.auth.logout();
-    this.snackBar.open('Logged out', ' ' , {
-      duration : 2000,
-      panelClass: ['snack-bar-message', 'snack-bar-info'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
+    this.toasterService.showToaster('wylogowano pomylnie', 'info');
   }
 
 

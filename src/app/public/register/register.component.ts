@@ -13,7 +13,7 @@ import {
 import { MaterialModule } from '../../material/material.module';
 import { EmailAvailable } from '../../shared/emailAvailable';
 import { MatSnackBar } from '@angular/material';
-
+import {ToasterService } from '../../shared/toaster.service';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +23,13 @@ import { MatSnackBar } from '@angular/material';
 export class RegisterComponent {
 
   public registerForm: FormGroup;
-  public error = false;
+  //public error = false;
 
     constructor(
       private http: HttpClient,
       private router: Router,
       private auth: AuthService,
-      public snackBar: MatSnackBar,
+      public toasterService: ToasterService,
       fb: FormBuilder
     ) {
       this.registerForm = fb.group({
@@ -45,7 +45,7 @@ export class RegisterComponent {
     }
 
 
-    show(){
+    show() {
       console.log(this.registerForm.value);
     }
   // w html musi być sprawdona czy email nie m nulla po przez - '?' (email.errors?.emailExist)
@@ -82,23 +82,13 @@ onRegister(): void {
     console.log('Formularz: ' + this.registerForm.value);
     this.auth.register(this.registerForm.value).subscribe(result => {
       if (result === true) {
-          this.snackBar.open('Registered succesfully', ' ' , {
-          duration : 2000,
-          panelClass: ['snack-bar-message', 'snack-bar-success'],
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this.toasterService.showToaster('zarejestrowano pomylnie', 'success');
         this.router.navigateByUrl('/login');
       }
-      this.error = false;
+      //this.error = false;
   }, err => {
-    this.snackBar.open('Registered failed', ' ' , {
-      duration : 2000,
-      panelClass: ['snack-bar-message', 'snack-bar-error'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
-    this.error = true;
+    this.toasterService.showToaster('wystąpił błąd', 'error');
+    //this.error = true;
   });
 
   }

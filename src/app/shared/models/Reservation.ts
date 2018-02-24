@@ -3,5 +3,5 @@ export interface Reservation {
   name: string;
   start: number;
   end: string;
-  status: string;
+  status?: string;
 }

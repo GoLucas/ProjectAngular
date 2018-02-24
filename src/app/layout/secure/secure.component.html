@@ -9,36 +9,79 @@
     </a>
     <mat-nav-list class="sidenav__list">
       <a mat-list-item ngClass="navListHeader">
-        <mat-icon class="sidenav__list__icon">home</mat-icon>
+        <mat-icon class="sidenav__list__icon">person</mat-icon>
         GŁÓWNE
       </a>
       <a mat-list-item routerLink="/reservation">
-        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        <mat-icon class="sidenav__list__icon">search</mat-icon>
         Reservation
       </a>
       <a mat-list-item routerLink= "/reservation-view">
-        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        <mat-icon class="sidenav__list__icon">date_range</mat-icon>
         My reservations
       </a>
       <a mat-list-item routerLink="/payments">
-        <mat-icon class="sidenav__list__icon">settings</mat-icon>
+        <mat-icon class="sidenav__list__icon">monetization_on</mat-icon>
         Payments
       </a>
+      <a mat-list-item routerLink="/order-service">
+        <mat-icon class="sidenav__list__icon">add_shopping_cart</mat-icon>
+        Services
+      </a>
+
+      <a mat-list-item routerLink="/tickets">
+        <mat-icon class="sidenav__list__icon">live_help</mat-icon>
+        Tickets
+      </a>
+
     </mat-nav-list>
 
-    <mat-nav-list class="sidenav__list">
+    <mat-nav-list class="sidenav__list" *ngIf="isAdmin()">
+        <a mat-list-item ngClass="navListHeader">
+            <mat-icon class="sidenav__list__icon">start_border</mat-icon>
+            Admin
+          </a>
+
+        <a mat-list-item routerLink="/status">
+          <mat-icon class="sidenav__list__icon">cached</mat-icon>
+          Status
+        </a>
+
+        <a mat-list-item routerLink="/handle-ticket">
+          <mat-icon class="sidenav__list__icon">local_offer</mat-icon>
+          Handle Tickets
+        </a>
+
+        <a mat-list-item routerLink="/newsletter">
+          <mat-icon class="sidenav__list__icon">drafts</mat-icon>
+          Newsletter
+        </a>
+
+        <a mat-list-item routerLink="/edit_cottage">
+          <mat-icon class="sidenav__list__icon">edit</mat-icon>
+          Edit Cottage
+        </a>
+
+        <a mat-list-item routerLink="/manage_maps">
+          <mat-icon class="sidenav__list__icon">place</mat-icon>
+          Manage Map
+        </a>
+
+
+    </mat-nav-list>
+    <!-- <mat-nav-list class="sidenav__list">
       <a *ngIf="isAdmin()" mat-list-item (click)="sidenav.toggle()" routerLink="/homeadmin">
         <mat-icon class="sidenav__list__icon">settings</mat-icon>
         HomeAdmin
       </a>
-    </mat-nav-list>
+    </mat-nav-list> -->
   </mat-sidenav>
 
   <div class="page-wrap">
 
     <header role="banner">
 
-      <mat-toolbar color="primary" ngClass="fixedNav" [ngStyle]="{'z-index': 1}">
+      <mat-toolbar color="primary" ngClass="fixedNav" [ngStyle]="{'z-index': 1000}">
         <mat-toolbar-row>
           <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
@@ -51,13 +94,9 @@
               <mat-icon>settings</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Test</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Test</span>
+              <button mat-menu-item routerLink= "/edit-profile">
+                <mat-icon>account_circle</mat-icon>
+                <span>Edytuj Profil</span>
               </button>
               <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>
@@ -81,8 +120,7 @@
     fxLayout="row"
      fxLayoutAlign="center center">
       <div>
-            Wszelkie prawa zastrzeżone Copyright
-
+            <p>&copy; 2018 cottage.test</p>
       </div>
     </footer>
 

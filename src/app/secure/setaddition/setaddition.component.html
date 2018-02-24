@@ -1,0 +1,20 @@
+
+  <!-- <form [formGroup]="form.get('checkboxes')">
+      <div *ngFor="let item of items2">
+        <input type="checkbox" [formControlName]="item.control">
+        <mat-slide-toggle  [formControlName]="item.control">{{ item.name }}</mat-slide-toggle>
+        <span>{{ item.name }}</span>
+      </div>
+    </form> -->
+
+                  <form [formGroup]="form.get('checkboxes')" (ngSubmit)="send()" >
+
+                      <mat-list role="list">
+                          <mat-list-item *ngFor="let item of items2" role="listitem">
+                            <mat-slide-toggle  [formControlName]="item.control">{{ item.name }}</mat-slide-toggle>
+                          </mat-list-item>
+                        </mat-list>
+                        <br>
+                        <br>
+                      <button mat-button [disabled]="form.invalid">Dodaj</button>
+                  </form>

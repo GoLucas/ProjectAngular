@@ -1,1 +1,35 @@
-<router-outlet></router-outlet>
+<div class="page-wrap">
+
+    <header role="banner">
+
+      <mat-toolbar color="primary" ngClass="fixedNav" [ngStyle]="{'z-index': 1000}">
+        <mat-toolbar-row>
+          <span ngClass="logo"  routerLink="/cottages">
+            <img src="assets/logo.png" class="angular-logo">
+            Cottage Reservation System
+          </span>
+          <span class="fill-remaining-space"></span>
+          <button mat-button routerLink="/contact">Kontakt</button>
+          <button mat-button routerLink="/cottages">Domki</button>
+          <button mat-button routerLink="/register">Register</button>
+          <button mat-button routerLink="/login">Login</button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+
+    </header>
+
+    <div ngClass="pageContent">
+      <router-outlet></router-outlet>
+    </div>
+
+    <footer  ngClass="footer-list"
+    fxLayout="row"
+     fxLayoutAlign="center center">
+      <div>
+            <p>&copy; 2018 cottage.test</p>
+      </div>
+    </footer>
+
+  </div>
+

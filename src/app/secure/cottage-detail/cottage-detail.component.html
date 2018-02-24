@@ -5,7 +5,7 @@
         <mat-card-header>
           <h2>{{(Cottage$ | async)?.name}}</h2>
         </mat-card-header>
-        <img mat-card-image src="https://otonoc.pl/zdjecie-1-10802-tatra-house---stylowe-domki-do-wynajecia.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image [src]="(Cottage$ | async)?.url" alt="Photo of a Shiba Inu">
         <mat-card-content ngClass="text_justify">
        <p ngClass="description">  {{(Cottage$ | async)?.description}} </p>
        <p>Liczba miejsc: <span ngClass="capacity">{{(Cottage$ | async)?.capacity}} </span></p>
@@ -21,7 +21,7 @@
         <h3>od : {{formatedDateStart}} do: {{formatedDateEnd}}</h3>
         <br>
         <p>Cena za dobę: {{(Cottage$ | async)?.basePrice}}zł</p>
-        <p>Cena za wynajem:{{(Cottage$ | async)?.basePrice}}zł x {{diffDays}} dni = {{(Cottage$ | async)?.price}}zł</p>
+        <p>Cena za wynajem:{{(Cottage$ | async)?.basePrice | currency:' ' }}zł &times; {{diffDays}} dni = {{(Cottage$ | async)?.price | currency:' ' }}zł</p>
 
         </mat-card-content>
         <mat-card-actions>

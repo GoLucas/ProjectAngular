@@ -1,0 +1,73 @@
+<div fxLayout
+ fxLayoutAlign="center"
+ ngClass="contentPayment"
+ fxLayoutGap="20px">
+
+ <div ngClass="block" fxFlex = "75%" fxFlexFill >
+
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Wybierz rezerwację</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Wybierz usługę</ng-template>
+                <mat-form-field>
+                    <mat-select placeholder="Usługi"
+                      [(ngModel)]="chosenOption"
+                      formControlName="firstCtrl">
+                      <mat-option *ngFor="let res of Service$ | async" [value]="res.id">
+                      {{res.name}} - [Cena: {{res.base_price}} zł]
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                      <mat-select placeholder="Rezerwacje"
+                      formControlName="secondCtrl">
+                        <mat-option *ngFor="let res of resObs$ | async" [value]="res.id">
+                          {{ res.name }} [ {{ res.start | date:"dd/MM/yy" }} - {{ res.end |date:"dd/MM/yy" }} ]
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                <div>
+                  <button mat-button matStepperNext [disabled]="firstFormGroup.invalid">Dalej</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="extraPaymentForm">
+              <form [formGroup]="extraPaymentForm">
+                <ng-template matStepLabel>Wybierz Liczbę</ng-template>
+                <mat-form-field>
+                  <input matInput
+                  formControlName="count"
+                  type="number"
+                  placeholder="Liczba"
+                  required
+                  min="1" max="50" step="1">
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Wróć</button>
+                  <button mat-button matStepperNext [disabled]="extraPaymentForm.invalid">Dalej</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Gotowe</ng-template>
+              Możesz złożyć zamwienie
+              <div>
+                <button mat-button matStepperPrevious>Wróć</button>
+                <button mat-button (click)="onSubmit()">Zamów</button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+
+        </mat-card-content>
+      </mat-card>
+
+
+ </div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <h3 mat-dialog-title>Edycja</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+      <div class="form">
+          <mat-form-field color="primary">
+            <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" disabled required>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--Textarea for demo purposes-->
+        <div class="form">
+          <mat-form-field color="primary">
+            <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" required >
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--Contains mat-hint for characters count and has maxLengt set-->
+        <div class="form">
+          <mat-form-field color="primary">
+            <textarea matInput #inputstate class="form-control" placeholder="Description" [(ngModel)]="data.description" name="description" maxlength="255" required ></textarea>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            <mat-hint align="end">{{inputstate.value?.length || 0}}/255</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="form">
+          <mat-form-field color="primary">
+            <input matInput type="number" placeholder="Capacity" [(ngModel)]="data.capacity" name="capacity">
+          </mat-form-field>
+        </div>
+
+        <div class="form">
+          <mat-form-field color="primary">
+            <input matInput type="number" placeholder="Base price" [(ngModel)]="data.base_price" name="base_price">
+          </mat-form-field>
+        </div>
+
+    <!-- <div class="form">
+      <mat-form-field color="primary">
+        <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="primary">
+        <input matInput placeholder="Updated at" [(ngModel)]="data.updated_at" name="updated_at">
+      </mat-form-field>
+    </div> -->
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Zapisz</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Wyjdź</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<div fxLayout
+ fxLayoutAlign="center"
+ ngClass="contentTickets"
+ fxLayoutGap="20px">
+
+     <div fxFlex = "50%" fxFlexFill ngClass="tab-shadow">
+        <mat-tab-group (selectedTabChange)="tabChange($event)">
+            <mat-tab label="Złóż Zgłoszenie">
+              <mat-card >
+                <mat-card-content>
+                    <form [formGroup]="ticketForm" (ngSubmit)="sendTicket()" >
+                        <mat-form-field class="full-width">
+                            <textarea  matInput
+                             #message
+                              maxlength="255"
+                               placeholder="Wiadomość"
+                                matTextareaAutosize
+                                 matAutosizeMinRows="2"
+                                 formControlName="ticketMessage"></textarea>
+                            <mat-hint align="end">{{message.value.length}} / 255</mat-hint>
+                          </mat-form-field>
+                          <div [ngClass]="'error-msg'" *ngIf="ticketMessage?.touched && ticketMessage?.invalid">pole wymagane</div>
+                  <br>
+                  <br>
+                 <button mat-raised-button  color="primary" [disabled]="ticketForm.invalid" >Sprawdź</button>
+                </form>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+
+            <mat-tab label="Moje Zgłoszenia">
+              <mat-card>
+                <mat-card-content>
+                    <mat-table  #table [dataSource]="dataSource">
+                        <!-- NAME Column -->
+                        <ng-container matColumnDef="message">
+                          <mat-header-cell *matHeaderCellDef> WIADOMOŚĆ </mat-header-cell>
+                          <mat-cell *matCellDef="let ticket"> {{ticket.message}} </mat-cell>
+                        </ng-container>
+
+                        <!-- START Column -->
+                        <ng-container matColumnDef="status">
+                          <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
+                          <mat-cell *matCellDef="let ticket"> {{ticket.status}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+
+                </mat-card-content>
+              </mat-card></mat-tab>
+          </mat-tab-group>
+    </div>
+</div>

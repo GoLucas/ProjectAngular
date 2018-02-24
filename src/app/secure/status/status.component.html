@@ -1,0 +1,154 @@
+<div fxLayout
+ fxLayoutAlign="center"
+ ngClass="contentStatus"
+ fxLayoutGap="20px">
+
+ <div ngClass="blocks" fxFlex = "20%" fxFlexFill >
+  <mat-card class="date-card">
+      <mat-card-header>
+        <h2>Wybierz Datę</h2>
+      </mat-card-header>
+
+      <mat-card-content>
+          <form [formGroup]="dateForm" (ngSubmit)="check()" >
+          <mat-form-field>
+              <input matInput
+               [min]="minDate"
+                [max]="maxDate"
+                 [matDatepicker]="pickerStart"
+                  placeholder="OD"
+                   formControlName="dateStart">
+              <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+              <mat-datepicker #pickerStart ></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput
+              [min]="minDate" [max]="maxDate"
+               [matDatepicker]="pickerEnd"
+                placeholder="DO"
+                 formControlName="dateEnd"
+                 [errorStateMatcher]="matcher">
+              <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEnd></mat-datepicker>
+              <mat-error *ngIf="dateForm.hasError('endDateLessThanStartDate')">Data DO nie może być wczniejsza niż OD</mat-error>
+            </mat-form-field>
+            <button mat-raised-button  color="primary" [disabled]="dateForm.invalid" >Sprawdź</button>
+          </form>
+      </mat-card-content>
+    </mat-card>
+</div>
+
+
+<div *ngIf="(Reservations$ | async)?.length > 0;then reservations else notfound">here is ignored</div>
+
+<ng-template #reservations>
+  <div ngClass="block" fxFlex = "30%" fxFlexFill >
+
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Wybierz rezerwację</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="ResFormGroup">
+            <mat-form-field>
+                <mat-select placeholder="Rezerwacje" (change)="onChange($event)" formControlName="res_id">
+                  <mat-option *ngFor="let res of Reservations$ | async" [value]="res.id">
+                    {{ res.name }} [ {{ res.start | date:"dd/MM/yy" }} - {{ res.end |date:"dd/MM/yy" }} ]
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div [ngClass]="'error-msg'" *ngIf="res_id?.touched && res_id?.invalid">wybierz datę</div>
+            </form>
+        </mat-card-content>
+      </mat-card>
+
+
+ </div>
+
+    <div ngClass="block" fxFlex = "50%" fxFlexFill ngClass="tab-shadow">
+        <mat-tab-group>
+            <mat-tab label="Status Rezerwacji">
+              <mat-card>
+                <mat-card-content>
+                  <form [formGroup]="StatusFormGroup">
+                    <mat-form-field>
+                        <mat-select placeholder="Statusy" formControlName="res_status_id">
+                          <mat-option *ngFor="let st of ResStatuses$ | async" [value]="st.id">
+                            {{ st.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div [ngClass]="'error-msg'" *ngIf="res_status_id?.touched && res_status_id?.invalid">wybierz rezerwację</div>
+                      <button mat-button [disabled]="StatusFormGroup.invalid" (click)="changeResStatus()">Zmień</button>
+                  </form>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+
+            <mat-tab label="Status płatnoci">
+              <mat-card>
+                <mat-card-content>
+                  <form [formGroup]="PaymentFormGroup">
+                    <mat-form-field>
+                        <mat-select placeholder="Płatnoci" formControlName="payment_id">
+                          <mat-option *ngFor="let payment of payObs$ | async" [value]="payment.payment_id">
+                            {{ payment.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div [ngClass]="'error-msg'" *ngIf="payment_id?.touched && payment_id?.invalid">wybierz rezerwację</div>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-form-field>
+                      <mat-select placeholder="Statusy" formControlName="payment_status_id">
+                        <mat-option *ngFor="let st of PayStatuses$ | async" [value]="st.id">
+                          {{ st.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div [ngClass]="'error-msg'" *ngIf="payment_status_id?.touched && payment_status_id?.invalid">wybierz płatnoć</div>
+                    <button mat-button [disabled]="PaymentFormGroup.invalid" (click)="changePaymentStatus()">Zmień</button>
+                  </form>
+
+
+
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+
+
+            <mat-tab label="Zakończ rezerwcję">
+                <mat-card>
+                  <mat-card-content>
+                    Ustaw datę zakończenia rezerwacji na : {{todayDate | date:"dd/MM/yy"}}
+                  </mat-card-content>
+                  <mat-card-actions>
+                      <button mat-raised-button color="primary" [disabled]="ResFormGroup.invalid" (click)="endResDate()">Zmień</button>
+                      <div [ngClass]="'error-msg'" *ngIf="ResFormGroup.invalid">wybierz rezerwację</div>
+                    </mat-card-actions>
+                </mat-card>
+              </mat-tab>
+
+              <mat-tab label="Usuń rezerwcję">
+                <mat-card>
+                  <mat-card-content>
+                    usuń rezerwację
+                  </mat-card-content>
+                  <mat-card-actions>
+                      <button mat-raised-button color="primary" [disabled]="ResFormGroup.invalid" (click)="deleteReservation()">Usuń</button>
+                      <div [ngClass]="'error-msg'" *ngIf="ResFormGroup.invalid">wybierz rezerwację</div>
+                    </mat-card-actions>
+                </mat-card>
+              </mat-tab>
+          </mat-tab-group>
+    </div>
+</ng-template>
+
+<ng-template #notfound>
+    <mat-card ngClass="block" fxFlex fxFlexFill ngClass="tab-shadow" *ngIf="errData">
+      Brak rezerwacji w podanym okresie czasu
+    </mat-card>
+</ng-template>
+</div>

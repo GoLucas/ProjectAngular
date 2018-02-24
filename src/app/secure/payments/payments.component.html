@@ -42,7 +42,7 @@
         <!-- END Column -->
         <ng-container matColumnDef="payment_amount">
           <mat-header-cell *matHeaderCellDef> SUMA </mat-header-cell>
-          <mat-cell *matCellDef="let payment"> {{payment.payment_amount}} zł </mat-cell>
+          <mat-cell *matCellDef="let payment"> {{payment.payment_amount}} zł</mat-cell>
         </ng-container>
 
         <!-- STATUS Column -->
@@ -51,15 +51,13 @@
           <mat-cell *matCellDef="let payment"> {{payment.status}} </mat-cell>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="error">
-            <mat-header-cell *matHeaderCellDef class="error"></mat-header-cell>
-            <mat-cell *matCellDef="let item" class="error" [ngClass]="{displayed: item.error}">
-                {{ item.error}}
-            </mat-cell>
-        </ng-container> -->
+        <!-- <ng-container matColumnDef="total">
+            <mat-cell *matCellDef="let total">{{ total.total }}</mat-cell>
+          </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <!-- <mat-row class="sticky-footer" *matRowDef="let row: columns: ['total']; when: isLastRow"></mat-row> -->
       </mat-table>
     </div>
 </div>

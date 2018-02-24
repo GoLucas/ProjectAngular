@@ -1,4 +1,5 @@
-export class User {
+export interface User {
+  id?: number;
   email: string;
   first_name: string;
   last_name: string;
@@ -6,6 +7,5 @@ export class User {
   city: string;
   postal_code: string;
   phone: string;
-  password: string;
-  constructor() {}
+  password?: string;
 }

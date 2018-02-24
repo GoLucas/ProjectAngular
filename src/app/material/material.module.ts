@@ -15,6 +15,13 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {
   MatMenuModule,
   MatDialogModule,
@@ -47,7 +54,14 @@ import {
     MatDatepickerModule,
     MatTabsModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatButtonModule,
@@ -69,7 +83,15 @@ import {
     MatDatepickerModule,
     MatTabsModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+
   ]
 })
 export class MaterialModule {}
