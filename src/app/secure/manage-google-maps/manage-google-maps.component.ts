@@ -23,8 +23,8 @@ interface Coordinates {
 })
 export class ManageGoogleMapsComponent implements OnInit {
   public apiKeyFormControl: FormControl;
-  public latitude: number;
-  public longitude: number;
+  public latitude = 52.237049;
+  public longitude = 21.017532;
   public searchControl: FormControl;
   public zoom: number;
   public disabled = false;
@@ -44,8 +44,10 @@ export class ManageGoogleMapsComponent implements OnInit {
 
     // set google maps defaults
     this.coordinates = JSON.parse(localStorage.getItem('coordinates'));
-    this.latitude = this.coordinates.latitude;
-    this.longitude = this.coordinates.longitude;
+    if (this.coordinates !== null) {
+      this.latitude = this.coordinates.latitude;
+      this.longitude = this.coordinates.longitude;
+    }
     // create search FormControl
     this.searchControl = new FormControl();
 

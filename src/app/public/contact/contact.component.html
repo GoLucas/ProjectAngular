@@ -12,7 +12,7 @@
       </mat-card-header>
 
 
-      <mat-toolbar color="primary">
+      <mat-toolbar ngClass="contact_color1">
         <mat-toolbar-row>
           <span>Nr Tel. 1: </span>
           <span class="example-spacer"></span>
@@ -21,7 +21,7 @@
         </mat-toolbar-row>
       </mat-toolbar>
 
-      <mat-toolbar color="accent">
+      <mat-toolbar ngClass="contact_color2">
         <mat-toolbar-row>
           <span>Nr Tel. 2: </span>
           <span class="example-spacer"></span>
@@ -30,7 +30,7 @@
         </mat-toolbar-row>
       </mat-toolbar>
 
-      <mat-toolbar color="warn">
+      <mat-toolbar ngClass="contact_color3">
         <mat-toolbar-row>
           <span>Adres email: </span>
           <span class="example-spacer"></span>
@@ -41,12 +41,12 @@
     </mat-card>
   </div>
   <!-- map.offsetHeight -->
-  <div #map class="blocks" fxFlex="50%">
+  <!-- <div #map class="blocks" fxFlex="50%">
     <mat-card class="map-card">
       <agm-map [style.height.px]="height" [latitude]="lat" [longitude]="lng">
           <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       </agm-map>
     </mat-card>
-  </div>
+  </div> -->
 
 </div>

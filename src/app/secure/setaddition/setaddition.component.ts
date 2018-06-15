@@ -48,7 +48,8 @@ export class SetadditionComponent implements OnInit {
 
   doSomething(cottage_id: number) {
     this.form = new FormGroup({
-      checkboxes: new FormGroup({})
+      checkboxes: new FormGroup({}),
+      cottage_id: new FormControl(cottage_id)
     });
 
     this.additionsService.checkAdditions(cottage_id).subscribe(data => {

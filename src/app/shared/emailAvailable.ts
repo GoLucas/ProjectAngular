@@ -4,14 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import { HttpHeaders, HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-
-
 @Injectable()
 export class EmailAvailable {
   static http: any;
   constructor(private http: HttpClient) {}
 
-  static unique(control: FormControl){
+  static unique(control: FormControl) {
 
     return new Promise(resolve => {
 
@@ -23,7 +21,7 @@ export class EmailAvailable {
       }).subscribe(res => {
             if ( res === true) {
               resolve({'emailExist': true});
-              console.log('resolve emailExist'+ res);
+              console.log('resolve emailExist' + res);
             }else {
               resolve(null);
             console.log(' resolve null' );

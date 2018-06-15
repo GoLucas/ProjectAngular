@@ -14,24 +14,24 @@
       </a>
       <a mat-list-item routerLink="/reservation">
         <mat-icon class="sidenav__list__icon">search</mat-icon>
-        Reservation
+        Szukaj
       </a>
       <a mat-list-item routerLink= "/reservation-view">
         <mat-icon class="sidenav__list__icon">date_range</mat-icon>
-        My reservations
+        Moje Rezerwacje
       </a>
       <a mat-list-item routerLink="/payments">
         <mat-icon class="sidenav__list__icon">monetization_on</mat-icon>
-        Payments
+        Płatnoci
       </a>
       <a mat-list-item routerLink="/order-service">
         <mat-icon class="sidenav__list__icon">add_shopping_cart</mat-icon>
-        Services
+        Usługi
       </a>
 
       <a mat-list-item routerLink="/tickets">
         <mat-icon class="sidenav__list__icon">live_help</mat-icon>
-        Tickets
+        Zgłoszenia
       </a>
 
     </mat-nav-list>
@@ -39,17 +39,17 @@
     <mat-nav-list class="sidenav__list" *ngIf="isAdmin()">
         <a mat-list-item ngClass="navListHeader">
             <mat-icon class="sidenav__list__icon">start_border</mat-icon>
-            Admin
+            Administrator
           </a>
 
         <a mat-list-item routerLink="/status">
           <mat-icon class="sidenav__list__icon">cached</mat-icon>
-          Status
+          Obsługa Rezerwacji
         </a>
 
         <a mat-list-item routerLink="/handle-ticket">
           <mat-icon class="sidenav__list__icon">local_offer</mat-icon>
-          Handle Tickets
+          Obsługa zgłoszeń
         </a>
 
         <a mat-list-item routerLink="/newsletter">
@@ -59,12 +59,12 @@
 
         <a mat-list-item routerLink="/edit_cottage">
           <mat-icon class="sidenav__list__icon">edit</mat-icon>
-          Edit Cottage
+          Edytuj Obiekt
         </a>
 
         <a mat-list-item routerLink="/manage_maps">
           <mat-icon class="sidenav__list__icon">place</mat-icon>
-          Manage Map
+          Zarządzaj mapą
         </a>
 
 
@@ -86,7 +86,10 @@
           <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
-          <span>Quick Chatt</span>
+          <span ngClass="logo">
+            <img src="assets/logo.png" class="angular-logo">
+            Cottage Reservation System
+          </span>
           <span class="example-spacer"></span>
           <span>Witaj {{userName}} {{isAdmin() ? "*admin*" : ""}}</span>
           <div *ngIf="(isLoggedIn | async)">
@@ -100,7 +103,7 @@
               </button>
               <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>
-                <span>Logout</span>
+                <span>Wyloguj</span>
               </button>
             </mat-menu>
 
